@@ -48,7 +48,7 @@
 
     /* Main container */
     main {
-      max-width: 1100px;
+      max-width: 800px;
       margin: -3rem auto 4rem;
       padding: 0 1.5rem;
     }
@@ -67,41 +67,46 @@
       margin-bottom: 1rem;
     }
 
-    .about-card .intro {
+    .about-card p {
       font-size: 1.1rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* Grid */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+    /* Buttons inside About card */
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
       margin-top: 2rem;
     }
 
-    .feature {
-      background: var(--light-blue);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .feature h3 {
-      color: var(--primary-blue);
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .feature p {
-      color: var(--text-dark);
+    .auth-buttons a {
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
       font-size: 0.95rem;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    .login-btn {
+      background: var(--primary-blue);
+      color: white;
+    }
+
+    .login-btn:hover {
+      background: var(--accent-blue);
+    }
+
+    .signup-btn {
+      background: white;
+      color: var(--primary-blue);
+      border: 1px solid var(--primary-blue);
+    }
+
+    .signup-btn:hover {
+      background: #e0ecff;
     }
 
     /* Footer */
@@ -125,7 +130,7 @@
     <section class="about-card">
       <h2>About ValueCheck</h2>
 
-      <p class="intro">
+      <p>
         ValueCheck helps buyers and renters determine whether a property
         listing is underpriced, fairly priced, or overpriced without needing
         deep market knowledge.
@@ -134,19 +139,18 @@
       <p>
         By analysing listing details such as location, property features, and
         advertised price, ValueCheck provides clear insights that simplify
-        decision-making in current fast-moving housing market.
+        decision-making in the current fast-moving housing market.
       </p>
 
-      <div class="features">
-        <div class="feature">
+      <p>
+        <strong>Disclaimer:</strong> ValueCheck provides AI-generated estimates for informational purposes
+        only and does not constitute financial or investment advice.
+      </p>
 
-        <div class="feature">
-          <h3>Disclaimer</h3>
-          <p>
-            ValueCheck provides AI-generated estimates for informational purposes
-            only and does not constitute financial or investment advice.
-          </p>
-        </div>
+      <!-- Auth buttons after disclaimer -->
+      <div class="auth-buttons">
+        <a href="auth.html" class="login-btn">Login</a>
+        <a href="auth.html" class="signup-btn">Create Account</a>
       </div>
     </section>
   </main>

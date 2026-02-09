@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account | ValueCheck</title>
+
+  <style>
+    :root {
+      --primary-blue: #1e3a8a;
+      --accent-blue: #2563eb;
+      --light-blue: #e0ecff;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f8ff, #e0ecff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .auth-header h1 {
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--light-blue);
+    }
+
+    .tab {
+      flex: 1;
+      padding: 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--primary-blue);
+    }
+
+    .tab.active {
+      background: var(--accent-blue);
+      color: white;
+    }
+
+    form {
+      display: none;
+    }
+
+    form.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--accent-blue);
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>ValueCheck</h1>
+      <p>Login or create your account</p>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showLogin()">Login</div>
+      <div class="tab" onclick="showSignup()">Create Account</div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="active">
+      <label>Email</label>
+      <input type="email" placeholder="you@example.com" required />
+
+      <label>Password</label>
+      <input type="password" placeholder="••••••••" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signupForm">
+      <label>Email</label>
+      <input type="email" placeholder="you@example.com" required />
+
+      <label>Password</label>
+      <input type="password" placeholder="Create a password" required />
+
+      <label>Confirm Password</label>
+      <input type="password" placeholder="Confirm password" required />
+
+      <button type="submit">Create Account</button>
+    </form>
+
+    <div class="footer-text">
+      Secure access · AI-powered insights
+    </div>
+  </div>
+
+  <script>
+    function showLogin() {
+      document.getElementById("loginForm").classList.add("active");
+      document.getElementById("signupForm").classList.remove("active");
+      document.querySelectorAll(".tab")[0].classList.add("active");
+      document.querySelectorAll(".tab")[1].classList.remove("active");
+    }
+
+    function showSignup() {
+      document.getElementById("signupForm").classList.add("active");
+      document.getElementById("loginForm").classList.remove("active");
+      document.querySelectorAll(".tab")[1].classList.add("active");
+      document.querySelectorAll(".tab")[0].classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>
