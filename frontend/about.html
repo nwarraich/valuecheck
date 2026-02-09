@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | ValueCheck</title>
+
+  <style>
+    :root {
+      --primary-blue: #1e3a8a;
+      --light-blue: #e0ecff;
+      --accent-blue: #2563eb;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      background-color: #f5f8ff;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Main container */
+    main {
+      max-width: 1100px;
+      margin: -3rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    /* About card */
+    .about-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .about-card h2 {
+      font-size: 2rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+
+    .about-card .intro {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .feature {
+      background: var(--light-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature h3 {
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .feature p {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>ValueCheck</h1>
+    <p>AI-powered real estate price analysis</p>
+  </header>
+
+  <main>
+    <section class="about-card">
+      <h2>About ValueCheck</h2>
+
+      <p class="intro">
+        ValueCheck helps buyers and renters determine whether a property
+        listing is underpriced, fairly priced, or overpriced without needing
+        deep market knowledge.
+      </p>
+
+      <p>
+        By analysing listing details such as location, property features, and
+        advertised price, ValueCheck provides clear insights that simplify
+        decision-making in current fast-moving housing market.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+
+        <div class="feature">
+          <h3>Disclaimer</h3>
+          <p>
+            ValueCheck provides AI-generated estimates for informational purposes
+            only and does not constitute financial or investment advice.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 ValueCheck · Built with AI
+  </footer>
+
+</body>
+</html>
