@@ -1,27 +1,58 @@
 import os
+import re
 import requests
 from openai import OpenAI
 from dotenv import load_dotenv
+from html.parser import HTMLParser
 
 load_dotenv()
 
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key) if api_key else None
 
+class HTMLTextExtractor(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.text = []
+        self.skip_content = False
+    
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style', 'meta', 'link'):
+            self.skip_content = True
+    
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style', 'meta', 'link'):
+            self.skip_content = False
+    
+    def handle_data(self, data):
+        if not self.skip_content:
+            self.text.append(data)
+    
+    def get_text(self):
+        return ' '.join(self.text).strip()
+
 def fetch_url_content(url: str) -> str:
-    """Fetch text content from a URL"""
+    """Fetch and extract text content from a URL"""
     try:
         if not url.startswith(('http://', 'https://')):
             return url  # Not a URL, return as is
         
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
         }
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=10, verify=False)
         response.raise_for_status()
         
-        # Return basic text from HTML
-        return response.text[:5000]  # Limit to first 5000 chars
+        # Extract text from HTML
+        parser = HTMLTextExtractor()
+        parser.feed(response.text)
+        text = parser.get_text()
+        
+        # Clean up whitespace
+        text = re.sub(r'\s+', ' ', text)
+        
+        # Return first 3000 characters of meaningful content
+        return text[:3000] if text else "Could not extract text from URL"
     except Exception as e:
         return f"Could not fetch URL: {str(e)}"
 
