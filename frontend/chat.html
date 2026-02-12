@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analyze | ValueCheck</title>
+
+  <style>
+    :root {
+      --primary-blue: #1e3a8a;
+      --accent-blue: #2563eb;
+      --light-blue: #e0ecff;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --card-bg: #ffffff;
+      --success: #16a34a;
+      --warning: #ca8a04;
+      --danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      background-color: #f5f8ff;
+      color: var(--text-dark);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+      color: white;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: -2.5rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    button {
+      margin-top: 1.2rem;
+      padding: 0.7rem 1.4rem;
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--accent-blue);
+    }
+
+    /* AI Response */
+    .result {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: var(--light-blue);
+      display: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .fair {
+      background: #dcfce7;
+      color: var(--success);
+    }
+
+    .result p {
+      margin-bottom: 0.6rem;
+      color: var(--text-dark);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Property Analysis</h1>
+    <p>Paste a real estate listing and let ValueCheck analyze it</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <label for="listing">Real Estate Listing</label>
+      <textarea
+        id="listing"
+        placeholder="Paste the full property listing here (price, location, bedrooms, description, etc.)"
+      ></textarea>
+
+      <button onclick="analyze()">Analyze Listing</button>
+
+      <!-- AI Output -->
+      <div class="result" id="result">
+        <div class="badge fair">Fairly Priced</div>
+
+        <p><strong>Estimated Value:</strong> $820,000 – $860,000</p>
+        <p><strong>Listed Price:</strong> $840,000</p>
+
+        <p>
+          This property appears to be fairly priced based on similar listings
+          in the same suburb, number of bedrooms, and recent market trends.
+        </p>
+
+        <p>
+          The price aligns with comparable sales, and no major overpricing
+          signals were detected from the listing description.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 ValueCheck · AI-powered insights
+  </footer>
+
+  <script>
+    function analyze() {
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
