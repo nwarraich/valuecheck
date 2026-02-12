@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from analyser import analyze_listing
 from fastapi.middleware.cors import CORSMiddleware
+from backend.analyzer import analyze_listing
+from routes.auth_routes import auth_router
+from routes.analysis_routes import analysis_router
 
 app = FastAPI()
 
@@ -14,16 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class ListingRequest(BaseModel):
-    listing_text: str
+# Include routers
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(analysis_router, prefix="/analyze", tags=["analyze"])
 
-class AnalysisResponse(BaseModel):
-    verdict: str
-    estimated_range: str
-    listed_price: str
-    explanation: str
-
-@app.post("/analyze", response_model=AnalysisResponse)
-def analyze(data: ListingRequest):
-    result = analyze_listing(data.listing_text)
-    return result
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001)

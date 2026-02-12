@@ -1,11 +1,24 @@
-from flask import Blueprint, jsonify
+from fastapi import APIRouter
+from pydantic import BaseModel
 
-auth_bp = Blueprint("auth", __name__)
+auth_router = APIRouter()
 
-@auth_bp.route("/login", methods=["POST"])
-def login():
-    return jsonify({"message": "Login endpoint (TODO)"})
+class LoginRequest(BaseModel):
+    username: str
+    password: str
 
-@auth_bp.route("/signup", methods=["POST"])
-def signup():
-    return jsonify({"message": "Signup endpoint (TODO)"})
+class LoginResponse(BaseModel):
+    token: str
+    message: str
+
+@auth_router.post("/login", response_model=LoginResponse)
+def login(data: LoginRequest):
+    # Placeholder authentication
+    return {
+        "token": "placeholder-token",
+        "message": f"Welcome, {data.username}"
+    }
+
+@auth_router.post("/logout")
+def logout():
+    return {"message": "Logged out"}

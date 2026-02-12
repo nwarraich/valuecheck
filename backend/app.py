@@ -3,9 +3,10 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 
-from database import db
+from backend.database import db
 from routes.auth_routes import auth_bp
 from routes.analysis_routes import analysis_bp
+
 
 load_dotenv()
 

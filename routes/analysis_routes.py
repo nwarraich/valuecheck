@@ -1,15 +1,19 @@
-from flask import Blueprint, request, jsonify
-from analyzer import analyze_listing
+from fastapi import APIRouter
+from pydantic import BaseModel
+from backend.analyzer import analyze_listing
 
-analysis_bp = Blueprint("analysis", __name__)
+analysis_router = APIRouter()
 
-@analysis_bp.route("/", methods=["POST"])
-def analyze():
-    data = request.get_json()
-    listing_text = data.get("listing_text", "")
+class ListingRequest(BaseModel):
+    listing_text: str
 
-    if not listing_text:
-        return jsonify({"error": "Listing text is required"}), 400
+class AnalysisResponse(BaseModel):
+    verdict: str
+    estimated_range: str
+    listed_price: str
+    explanation: str
 
-    result = analyze_listing(listing_text)
-    return jsonify(result)
+@analysis_router.post("", response_model=AnalysisResponse)
+def analyze(data: ListingRequest):
+    result = analyze_listing(data.listing_text)
+    return result
