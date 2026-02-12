@@ -14,6 +14,7 @@ class AnalysisResponse(BaseModel):
     explanation: str
 
 @analysis_router.post("", response_model=AnalysisResponse)
+@analysis_router.post("/", response_model=AnalysisResponse)
 def analyze(data: ListingRequest):
     result = analyze_listing(data.listing_text)
     return result
