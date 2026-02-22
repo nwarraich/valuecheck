@@ -143,26 +143,26 @@
     <!-- Login Form -->
     <form id="loginForm" class="active">
       <label>Email</label>
-      <input type="email" placeholder="you@example.com" required />
+      <input id="loginEmail" type="email" placeholder="you@example.com" required />
 
       <label>Password</label>
-      <input type="password" placeholder="••••••••" required />
+      <input id="loginPassword" type="password" placeholder="••••••••" required />
 
-      <button type="submit">Login</button>
+      <button id="loginBtn" type="submit">Login</button>
     </form>
 
     <!-- Signup Form -->
     <form id="signupForm">
       <label>Email</label>
-      <input type="email" placeholder="you@example.com" required />
+      <input id="signupEmail" type="email" placeholder="you@example.com" required />
 
       <label>Password</label>
-      <input type="password" placeholder="Create a password" required />
+      <input id="signupPassword" type="password" placeholder="Create a password" required />
 
       <label>Confirm Password</label>
-      <input type="password" placeholder="Confirm password" required />
+      <input id="signupConfirm" type="password" placeholder="Confirm password" required />
 
-      <button type="submit">Create Account</button>
+      <button id="signupBtn" type="submit">Create Account</button>
     </form>
 
     <div class="footer-text">
@@ -184,6 +184,69 @@
       document.querySelectorAll(".tab")[1].classList.add("active");
       document.querySelectorAll(".tab")[0].classList.remove("active");
     }
+
+    // --- Auth form handling ---
+    const API_BASE = window.API_BASE || 'http://127.0.0.1:8001';
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pw = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = 'Logging in...';
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: email, password: pw })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || res.statusText || 'Login failed');
+
+        // Save token and redirect to analyze page
+        if (data.token) localStorage.setItem('authToken', data.token);
+        window.location.href = 'analyze.html';
+      } catch (err) {
+        alert('Login error: ' + err.message);
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Login';
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('signupEmail').value.trim();
+      const pw = document.getElementById('signupPassword').value;
+      const pwc = document.getElementById('signupConfirm').value;
+      const btn = document.getElementById('signupBtn');
+
+      if (pw !== pwc) { alert('Passwords do not match'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Creating...';
+      try {
+        const res = await fetch(`${API_BASE}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: email, password: pw })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || res.statusText || 'Registration failed');
+
+        if (data.token) localStorage.setItem('authToken', data.token);
+        window.location.href = 'analyze.html';
+      } catch (err) {
+        alert('Signup error: ' + err.message);
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+    });
   </script>
 
 </body>

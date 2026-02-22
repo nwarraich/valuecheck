@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.analyzer import analyze_listing
 from routes.auth_routes import auth_router
 from routes.analysis_routes import analysis_router
+from backend.db import create_tables
 
 app = FastAPI()
 
@@ -18,6 +19,10 @@ app.add_middleware(
 # Include routers
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(analysis_router, prefix="/analyze", tags=["analyze"])
+
+
+# Create DB tables on startup
+create_tables()
 
 if __name__ == "__main__":
     import uvicorn
