@@ -6,3 +6,5 @@ openai
 flask-cors
 requests
 SQLAlchemy
+PyJWT
+Werkzeug
