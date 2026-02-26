@@ -1,6 +1,8 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from backend.analyzer import analyze_listing
+from pydantic import BaseModel
+from typing import Any
 
 analysis_router = APIRouter()
 
@@ -11,7 +13,7 @@ class AnalysisResponse(BaseModel):
     verdict: str
     estimated_range: str
     listed_price: str
-    explanation: str
+    explanation: Any
 
 @analysis_router.post("", response_model=AnalysisResponse)
 @analysis_router.post("/", response_model=AnalysisResponse)
